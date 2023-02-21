@@ -35,7 +35,7 @@ export default function Home() {
       {/* Section 1 */}
       <section className="h-auto bg-white">
         <div className="px-10 py-4 mx-auto max-w-7xl">
-          <div className="w-full mx-auto text-left md:text-center">
+          <div className="w-full mx-auto text-center">
             <h1 className="mb-6 text-5xl font-extrabold leading-none max-w-5xl mx-auto tracking-normal text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl md:tracking-tight">
               {" "}
               امسح{" "}
@@ -43,7 +43,7 @@ export default function Home() {
                 وأربح
               </span>{" "}
               مع
-              <br className="lg:block hidden" /> DARVET دارفيت{" "}
+              <br className="block " /> DARVET دارفيت{" "}
             </h1>
             <p className="px-0 mb-6 text-lg text-gray-600 md:text-xl lg:px-24">
               {" "}
