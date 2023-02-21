@@ -59,7 +59,7 @@ export default function Home() {
             <h2 className="box-border m-0 text-3xl font-semibold leading-tight tracking-tight text-black border-solid sm:text-4xl md:text-5xl">
               آخر المشتركين حتى الآن
             </h2>
-            <p className="box-border mt-4 text-2xl leading-normal text-gray-900 border-solid">
+            <p className="box-border mt-4 text-6xl leading-normal text-gray-900 border-solid">
               {latest}
             </p>
           </div>
