@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     var oldCount = count
     var oldPresent = present
-    onChildChanged(usersRef, (data) => {
+    onChildAdded(usersRef, (data) => {
       console.log(data.val().checked_in);
       oldCount++;
       if (data.val().checked_in)
