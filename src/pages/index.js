@@ -3,7 +3,7 @@ import { Inter } from '@next/font/google'
 import qr from '../img/qr.png'
 import React, { useState, useEffect } from 'react';
 
-import { getDatabase, ref, onChildAdded, onChildChanged, onChildRemoved } from "firebase/database";
+import { getDatabase, ref, onChildAdded, onChildChanged, onChildRemoved, onValue } from "firebase/database";
 import database from '../firebase'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     var oldCount = count
     var oldPresent = present
-    onChildAdded(usersRef, (data) => {
+    onValue(usersRef, (data) => {
       console.log(data.val().checked_in);
       oldCount++;
       if (data.val().checked_in)
