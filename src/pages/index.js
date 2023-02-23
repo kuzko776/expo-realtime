@@ -8,31 +8,53 @@ import database from '../firebase'
 
 const inter = Inter({ subsets: ['latin'] })
 
+
 export default function Home() {
   const usersRef = ref(database, 'users')
 
-  const [data, setData] = useState(null);
+  // const [users, setUsers] = useState([]);
   const [count, setCount] = useState(0);
   const [present, setPresent] = useState(0);
-  const [latest, setLatest] = useState('');
+  const [latest, setLatest] = useState(null);
+
 
   useEffect(() => {
-    var oldCount = count
-    var oldPresent = present
+    const local = []
+
+    const cal = () => {
+      var counter = 0;
+      local.forEach((user) => {
+        if (user.val().checked_in)
+          counter++
+      })
+
+      setCount(local.length)
+      setPresent(counter)
+
+    }
+
     onChildAdded(usersRef, (data) => {
-      console.log(data.val().checked_in);
-      oldCount++;
-      if (data.val().checked_in)
-        oldPresent++
-      setLatest(data.val().name);
-      setCount(oldCount)
-      setPresent(oldPresent)
+
+      local.push(data)
+      //setUsers(local)
+      cal()
     });
+
+    onChildChanged(usersRef, (data) => {
+      const index = local.findIndex((user) => user.key == data.key);
+      local[index] = data
+
+      setLatest(data)
+      //setUsers(local)
+
+      cal()
+    })
   }, [])
+
+
 
   return (
     <>
-      {/* Section 1 */}
       <section className="h-auto bg-white">
         <div className="px-10 py-4 mx-auto max-w-7xl">
           <div className="w-full mx-auto text-center">
@@ -57,10 +79,10 @@ export default function Home() {
         <div className="box-border max-w-6xl px-4 pb-12 mx-auto border-solid sm:px-6 md:px-6 lg:px-4">
           <div className="flex flex-col items-center leading-7 text-center text-gray-900">
             <h2 className="box-border m-0 text-3xl font-semibold leading-tight tracking-tight text-black border-solid sm:text-4xl md:text-5xl">
-              آخر المشتركين حتى الآن
+              مرحباً بك
             </h2>
             <p className="box-border mt-4 text-6xl leading-normal text-gray-900 border-solid">
-              {latest}
+              {latest?.val().name}
             </p>
           </div>
           <div className="grid max-w-md mx-auto mt-6 overflow-hidden leading-7 text-gray-900 border border-b-4 border-gray-300 border-blue-600 rounded-xl md:max-w-lg lg:max-w-none sm:mt-10 lg:grid-cols-3">
@@ -85,7 +107,7 @@ export default function Home() {
                 قم بمسح الرمز بكاميرا الجوال والتسجيل لربح جوائز قيمة من شركة دارفيت
               </p>
               <div className="flex items-center justify-center mt-6 leading-7 text-gray-900 border-0 border-solid sm:mt-8">
-                <Image src={qr} />
+                <Image src={qr} alt='QR' />
 
               </div>
             </div>
