@@ -3,7 +3,7 @@ import { Inter } from '@next/font/google'
 import qr from '../img/qr.png'
 import React, { useState, useEffect } from 'react';
 
-import { getDatabase, ref, onChildAdded, onChildChanged, onChildRemoved } from "firebase/database";
+import { getDatabase, ref, onChildAdded, onChildChanged, onChildRemoved, onValue } from "firebase/database";
 import database from '../firebase'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -91,7 +91,7 @@ export default function Home() {
                 الحضور في جناح دارفيت
               </h3>
               <p className="mt-3 leading-7 text-gray-900 border-0 border-solid">
-                عدد الحاضرين الذين استلموا جوائز
+عدد الحاضرين في جناح دارفيت حتى الآن
               </p>
               <div className="flex items-center justify-center mt-6 leading-7 text-gray-900 border-0 border-solid sm:mt-8">
                 <p className="box-border m-0 text-6xl font-semibold leading-normal text-center border-0 border-gray-200">
